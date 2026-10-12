@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh mục sản phẩm - Mộc Đỏ Coffee &amp; Tea</title>
+<style>
+:root{--brown:#78350f;--orange:#b45309;--red:#8f1e24;--paper:#fcfbf9;--ink:#34251f;--line:#eee4d8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink)}
+button,input{font:inherit}button{cursor:pointer}
+.announcement{background:var(--brown);color:#fff;text-align:center;padding:8px;font-size:13px;font-weight:600}
+.header{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:16px 5%;background:#fff;box-shadow:0 1px 3px #0000000d;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--brown);font-weight:800;font-size:18px;white-space:nowrap}
+.logo-icon{background:var(--brown);color:#fff;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:16px}
+.logo small{display:block;font-size:9px;letter-spacing:1px;color:var(--orange)}
+nav{display:flex;gap:22px}
+nav a{text-decoration:none;color:#4b5563;font-weight:500}
+nav a:hover,nav a.active{color:var(--orange)}
+.header-buttons{display:flex;gap:10px;align-items:center}
+.search-input{width:160px;padding:9px 10px;border:1px solid #e5e7eb;border-radius:8px}
+.cart-button,.secondary-button{background:#f3f4f6;border:0;padding:9px 12px;border-radius:8px;color:#374151;font-weight:600}
+.cart-button:hover,.secondary-button:hover{background:#e5e7eb}
+.cart-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;margin-left:4px;border-radius:50%;background:var(--red);color:#fff;font-size:12px}
+.menu-toggle{display:none;background:none;border:0;font-size:24px}
+.container{max-width:1200px;margin:auto;padding:38px 22px}
+.page-heading{text-align:center;margin-bottom:26px}
+.page-heading h1{color:var(--brown);font-size:30px;margin-bottom:8px}
+.page-heading p{color:#6b7280}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.toolbar select,.toolbar input{padding:10px 12px;border:1px solid #d1d5db;border-radius:7px;background:white}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.product-card{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:12px;transition:transform .2s,box-shadow .2s}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px #00000012}
+.product-card img{width:100%;height:190px;object-fit:cover;display:block;background:#f5eee6}
+.product-info{padding:14px}
+.product-info h3{font-size:16px;margin-bottom:7px;color:#34251f}
+.product-info p{color:#6b7280;font-size:13px;line-height:1.5;min-height:39px;margin-bottom:10px}
+.price{font-weight:800;color:var(--orange);margin-bottom:12px}
+.card-actions{display:flex;gap:8px}
+.add-cart-btn,.detail-link,.btn-add-cart{flex:1;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;border:0;border-radius:7px;padding:10px 9px;background:var(--orange);color:#fff;font-weight:700;font-size:14px}
+.add-cart-btn:hover,.btn-add-cart:hover{background:#92400e}
+.detail-link{background:#fff;border:1px solid var(--brown);color:var(--brown)}
+.detail-link:hover{background:#fff7ed}
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:30px 0 5px}
+.page-btn{min-width:38px;height:38px;padding:0 10px;border:1px solid #e5d7c8;border-radius:7px;background:#fff;color:var(--brown)}
+.page-btn.active,.page-btn:hover:not(:disabled){background:var(--brown);color:#fff}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+.pagination-info{text-align:center;color:#6b7280;font-size:13px;margin-top:12px}
+.product-detail-container{max-width:1000px;margin:40px auto;background:#fff;padding:36px;border-radius:16px;box-shadow:0 4px 20px #0000000d;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.detail-image img{width:100%;max-height:430px;object-fit:cover;border-radius:12px;display:block}
+.subtitle{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:1px;margin-bottom:8px}
+.detail-info h1{font-size:30px;color:var(--brown);margin-bottom:12px}
+.detail-price{display:block;font-size:24px;color:var(--orange);font-weight:800;margin-bottom:16px}
+.detail-desc{color:#4b5563;line-height:1.7;margin-bottom:22px}
+.quantity-box{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.quantity-box input{width:75px;padding:10px;border:1px solid #d1d5db;border-radius:7px;text-align:center}
+.btn-add-cart{flex:none;padding:13px 22px;font-size:15px}
+.back-link{display:inline-block;color:var(--brown);text-decoration:none;font-weight:600;margin-bottom:18px}
+.back-link:hover{color:var(--orange)}
+footer{text-align:center;padding:30px;background:#fff;margin-top:50px;border-top:1px solid #e5e7eb}
+.footer-logo{font-weight:800;color:var(--brown);text-decoration:none;font-size:16px;display:block;margin-bottom:6px}
+footer p{color:#4b5563;font-size:14px;margin-bottom:4px}
+footer small{color:#9ca3af;font-size:12px}
+.cart-overlay{position:fixed;inset:0;background:#0006;display:flex;justify-content:flex-end;visibility:hidden;opacity:0;transition:opacity .25s,visibility .25s;z-index:1000}
+.cart-overlay.active{visibility:visible;opacity:1}
+.cart-backdrop{position:absolute;inset:0}
+.cart-drawer{position:relative;width:100%;max-width:400px;height:100%;background:#fff;display:flex;flex-direction:column;box-shadow:-4px 0 20px #0002;transform:translateX(100%);transition:transform .3s ease}
+.cart-overlay.active .cart-drawer{transform:translateX(0)}
+.cart-heading{display:flex;justify-content:space-between;align-items:center;padding:20px;min-height:71px;background:var(--brown);color:#fff}
+.cart-heading h2{font-size:18px}
+.close-button{background:none;border:0;font-size:28px;color:#fff;line-height:1}
+.cart-items{flex:1;min-height:0;overflow-y:auto;padding:12px 20px}
+.empty-cart{text-align:center;color:#777;margin-top:40px}
+.cart-item{display:flex;align-items:center;gap:12px;padding:12px 0 15px;border-bottom:1px solid #eee}
+.cart-item img{width:60px;height:60px;object-fit:cover;border-radius:6px;flex-shrink:0}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:14px;font-weight:700;margin-bottom:5px}
+.cart-item-price{font-size:13px;color:var(--orange);font-weight:700}
+.cart-quantity{display:flex;align-items:center;gap:7px;margin-top:7px}
+.cart-quantity button{width:23px;height:23px;border:1px solid #ccc;background:#fff;border-radius:4px}
+.cart-quantity button:hover{background:var(--brown);color:#fff}
+.cart-quantity span{min-width:12px;text-align:center;font-size:13px}
+.delete-btn{border:0;background:none;padding:5px;font-size:19px;color:#333}
+.delete-btn:hover{color:#dc2626}
+.cart-bottom{padding:20px;padding-bottom:max(20px,env(safe-area-inset-bottom));border-top:1px solid #eee;background:#fdfbf7}
+.cart-total{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px;font-size:16px}
+.cart-total strong{color:var(--red)}
+.cart-total span{color:var(--orange);font-weight:800}
+.primary-button{width:100%;padding:14px;background:var(--orange);color:#fff;border:0;border-radius:7px;font-weight:800}
+.primary-button:hover{background:#92400e}
+.toast{position:fixed;right:20px;bottom:20px;z-index:2000;background:var(--brown);color:#fff;padding:12px 18px;border-radius:8px;box-shadow:0 4px 12px #0002;opacity:0;transform:translateY(15px);transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:900px){nav{gap:12px}.search-input{width:130px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-detail-container{margin:25px 18px;padding:25px;gap:25px}}
+@media(max-width:700px){.header{padding:12px 4%;flex-wrap:wrap}.menu-toggle{display:block;order:2}.header-buttons{order:3}.header nav{display:none;order:4;width:100%;flex-direction:column;padding:10px 0}.header nav.active{display:flex}.header nav a{padding:7px 0}.logo{font-size:16px}.search-input{display:none}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-card img{height:155px}.product-info{padding:11px}.product-info h3{font-size:14px}.product-info p{font-size:12px;min-height:54px}.card-actions{flex-direction:column}.page-heading h1{font-size:25px}.product-detail-container{grid-template-columns:1fr;padding:20px;margin:18px 12px;gap:22px}.detail-info h1{font-size:25px}.cart-drawer{max-width:100%}}
+@media(max-width:380px){.product-grid{grid-template-columns:1fr}.product-card img{height:200px}.header-buttons{gap:5px}.cart-button{padding:8px}}
+</style>
+</head>
+<body>
+
+<div class="announcement">CÀ PHÊ VIỆT - HƯƠNG VỊ QUEN THUỘC</div>
+<header class="header">
+  <a href="danhmuc.html" class="logo"><span class="logo-icon">MĐ</span><span>MỘC ĐỎ<small>COFFEE &amp; TEA</small></span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+  <nav id="mainNav">
+    <a href="danhmuc1.html" class="active">Danh mục</a>
+    <a href="sanpham.html">Sản phẩm</a>
+    <a href="#about">Giới thiệu</a>
+    <a href="#contact">Liên hệ</a>
+  </nav>
+  <div class="header-buttons">
+    <input class="search-input" id="productSearch" type="search" placeholder="Tìm sản phẩm..." aria-label="Tìm sản phẩm">
+    <button id="cartOpen" class="cart-button" type="button">🛒 Giỏ hàng <span id="cartCount" class="cart-count">0</span></button>
+  </div>
+</header>
+
+<main class="container">
+  <div class="page-heading">
+    <h1>Danh mục sản phẩm</h1>
+    <p>Khám phá thức uống yêu thích tại Mộc Đỏ Coffee &amp; Tea</p>
+  </div>
+  <div class="toolbar">
+    <span id="pageInfo">Đang tải sản phẩm...</span>
+    <label>Sắp xếp
+      <select id="sortProducts">
+        <option value="default">Mặc định</option>
+        <option value="price-asc">Giá: thấp đến cao</option>
+        <option value="price-desc">Giá: cao đến thấp</option>
+        <option value="name">Tên sản phẩm A–Z</option>
+      </select>
+    </label>
+  </div>
+  <section id="productGrid" class="product-grid" aria-label="Danh sách sản phẩm"></section>
+  <div id="pagination" class="pagination" aria-label="Phân trang sản phẩm"></div>
+  <p class="pagination-info">Mỗi trang hiển thị tối đa 20 sản phẩm.</p>
+</main>
+
+<footer id="contact">
+  <a href="danhmuc.html" class="footer-logo">MỘC ĐỎ COFFEE &amp; TEA</a>
+  <p>Cà phê Việt, dành cho những ngày thật đẹp.</p>
+  <small>© 2026 Mộc Đỏ Coffee. Website demo.</small>
+</footer>
+
+
+<div class="cart-overlay" id="cartOverlay" aria-hidden="true">
+  <div class="cart-backdrop" data-close-cart></div>
+  <aside class="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng">
+    <div class="cart-heading">
+      <h2>🛒 Giỏ hàng của bạn</h2>
+      <button id="cartClose" class="close-button" aria-label="Đóng giỏ hàng">×</button>
+    </div>
+    <div id="cartItems" class="cart-items"><p class="empty-cart">Giỏ hàng đang trống ☕</p></div>
+    <div class="cart-bottom">
+      <div class="cart-total"><strong>Tổng tiền:</strong><span id="cartTotal">0đ</span></div>
+      <button id="checkoutButton" class="primary-button">Thanh toán ngay</button>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+
+const PRODUCTS = [{"id": "bac-xiu", "name": "Bạc Xỉu Tươi", "price": 32000, "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80", "description": "Vị cà phê nhẹ nhàng hòa quyện cùng sữa tươi béo thơm."}, {"id": "ca-phe-sua-da", "name": "Cà Phê Sữa Đá", "price": 39000, "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80", "description": "Cà phê Việt đậm đà kết hợp sữa đặc, thơm ngon và tỉnh táo."}, {"id": "ca-phe-den", "name": "Cà Phê Đen Đá", "price": 32000, "image": "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=900&q=80", "description": "Hương cà phê rang xay đậm vị, hậu vị dễ chịu."}, {"id": "latte", "name": "Latte", "price": 45000, "image": "https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=900&q=80", "description": "Espresso kết hợp sữa tươi tạo lớp vị mềm mại."}, {"id": "cappuccino", "name": "Cappuccino", "price": 45000, "image": "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=900&q=80", "description": "Cà phê espresso với sữa nóng và lớp bọt sữa mịn."}, {"id": "americano", "name": "Americano", "price": 39000, "image": "https://images.unsplash.com/photo-1551030173-122a31c1b489?auto=format&fit=crop&w=900&q=80", "description": "Cà phê đen pha loãng, thanh và thơm."}, {"id": "mocha", "name": "Mocha", "price": 49000, "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=900&q=80", "description": "Cà phê, sữa và chocolate hòa quyện."}, {"id": "espresso", "name": "Espresso", "price": 35000, "image": "https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=900&q=80", "description": "Shot espresso nhỏ gọn, đậm hương cà phê."}, {"id": "tra-dao", "name": "Trà Đào Cam Sả", "price": 42000, "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80", "description": "Trà thơm dịu cùng đào, cam và hương sả tươi mát."}, {"id": "tra-vai", "name": "Trà Vải", "price": 42000, "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80", "description": "Trà thanh mát kết hợp vị ngọt thơm của vải."}, {"id": "tra-chanh", "name": "Trà Chanh", "price": 30000, "image": "https://images.unsplash.com/photo-1513558161293-cafd765edfd7?auto=format&fit=crop&w=900&q=80", "description": "Vị trà dịu, chanh tươi và hậu vị sảng khoái."}, {"id": "tra-tac", "name": "Trà Tắc", "price": 28000, "image": "https://images.unsplash.com/photo-1513558161293-cafd765edfd7?auto=format&fit=crop&w=900&q=80", "description": "Trà tắc chua ngọt, giải khát dễ uống."}, {"id": "matcha-latte", "name": "Matcha Latte", "price": 49000, "image": "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=80", "description": "Matcha thơm nhẹ hòa cùng sữa tươi."}, {"id": "tra-sua-truyen-thong", "name": "Trà Sữa Truyền Thống", "price": 39000, "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80", "description": "Trà sữa thơm béo với vị trà đậm đà."}, {"id": "tra-sua-tran-chau", "name": "Trà Sữa Trân Châu", "price": 45000, "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80", "description": "Trà sữa kết hợp trân châu dai mềm."}, {"id": "hong-tra-sua", "name": "Hồng Trà Sữa", "price": 42000, "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80", "description": "Hồng trà thơm đậm cùng sữa béo nhẹ."}, {"id": "socola-da", "name": "Socola Đá", "price": 42000, "image": "https://images.unsplash.com/photo-1542990253-0b8be4c7e5d2?auto=format&fit=crop&w=900&q=80", "description": "Chocolate thơm ngọt, mát lạnh."}, {"id": "sua-tuoi-tran-chau", "name": "Sữa Tươi Trân Châu", "price": 45000, "image": "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80", "description": "Sữa tươi thơm béo cùng trân châu dai mềm."}, {"id": "chanh-day", "name": "Chanh Dây", "price": 35000, "image": "https://images.unsplash.com/photo-1513558161293-cafd765edfd7?auto=format&fit=crop&w=900&q=80", "description": "Thức uống chua ngọt với hương chanh dây."}, {"id": "cam-ep", "name": "Cam Ép", "price": 39000, "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=900&q=80", "description": "Cam ép tươi mát, vị ngọt tự nhiên."}, {"id": "dua-hau-ep", "name": "Dưa Hấu Ép", "price": 39000, "image": "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=900&q=80", "description": "Nước ép dưa hấu mát lành."}, {"id": "sinh-to-bo", "name": "Sinh Tố Bơ", "price": 45000, "image": "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=900&q=80", "description": "Sinh tố bơ sánh mịn và béo thơm."}, {"id": "sinh-to-xoai", "name": "Sinh Tố Xoài", "price": 45000, "image": "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=80", "description": "Xoài chín xay mịn, thơm ngọt."}, {"id": "soda-viet-quat", "name": "Soda Việt Quất", "price": 42000, "image": "https://images.unsplash.com/photo-1513558161293-cafd765edfd7?auto=format&fit=crop&w=900&q=80", "description": "Soda sủi bọt với vị trái cây tươi mát."}];
+const CART_KEY = 'mocDoCart';
+
+function readCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    return Array.isArray(saved) ? saved : [];
+  } catch (e) { return []; }
+}
+let cart = readCart();
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartUI();
+}
+function formatMoney(value) {
+  return Number(value || 0).toLocaleString('vi-VN') + 'đ';
+}
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[ch]));
+}
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
+}
+function openCart() {
+  const overlay = document.getElementById('cartOverlay');
+  if (overlay) {
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeCart() {
+  const overlay = document.getElementById('cartOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+}
+function addToCart(productId, quantity = 1) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+  quantity = Math.max(1, parseInt(quantity, 10) || 1);
+  const found = cart.find(item => item.id === product.id);
+  if (found) found.quantity += quantity;
+  else cart.push({
+    id: product.id, name: product.name, price: product.price,
+    image: product.image, quantity
+  });
+  saveCart();
+  showToast('Đã thêm "' + product.name + '" vào giỏ hàng!');
+}
+function changeCartQuantity(index, delta) {
+  if (!cart[index]) return;
+  cart[index].quantity += delta;
+  if (cart[index].quantity <= 0) cart.splice(index, 1);
+  saveCart();
+}
+function removeCartItem(index) {
+  if (!cart[index]) return;
+  const name = cart[index].name;
+  cart.splice(index, 1);
+  saveCart();
+  showToast('Đã xóa "' + name + '" khỏi giỏ hàng.');
+}
+function updateCartUI() {
+  const countEl = document.getElementById('cartCount');
+  const itemsEl = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  const count = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+  if (countEl) countEl.textContent = count;
+  if (!itemsEl || !totalEl) return;
+
+  if (!cart.length) {
+    itemsEl.innerHTML = '<p class="empty-cart">Giỏ hàng của bạn đang trống ☕</p>';
+    totalEl.textContent = '0đ';
+    return;
+  }
+
+  let total = 0;
+  itemsEl.innerHTML = cart.map((item, index) => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    const image = item.image || (product && product.image) || '';
+    const name = item.name || (product && product.name) || 'Sản phẩm';
+    const price = Number(item.price) || 0;
+    const quantity = Math.max(1, Number(item.quantity) || 1);
+    total += price * quantity;
+    return `
+      <div class="cart-item">
+        <img src="${escapeHTML(image)}" alt="${escapeHTML(name)}">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${escapeHTML(name)}</div>
+          <div class="cart-item-price">${formatMoney(price)}</div>
+          <div class="cart-quantity">
+            <button type="button" aria-label="Giảm số lượng" onclick="changeCartQuantity(${index},-1)">−</button>
+            <span>${quantity}</span>
+            <button type="button" aria-label="Tăng số lượng" onclick="changeCartQuantity(${index},1)">+</button>
+          </div>
+        </div>
+        <button type="button" class="delete-btn" aria-label="Xóa ${escapeHTML(name)}" title="Xóa món này" onclick="removeCartItem(${index})">🗑️</button>
+      </div>`;
+  }).join('');
+  totalEl.textContent = formatMoney(total);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartUI();
+
+  const openBtn = document.getElementById('cartOpen');
+  const closeBtn = document.getElementById('cartClose');
+  const backdrop = document.querySelector('[data-close-cart]');
+  const menuToggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  const checkout = document.getElementById('checkoutButton');
+
+  if (openBtn) openBtn.addEventListener('click', openCart);
+  if (closeBtn) closeBtn.addEventListener('click', closeCart);
+  if (backdrop) backdrop.addEventListener('click', closeCart);
+  if (menuToggle && nav) menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeCart();
+  });
+
+  if (checkout) checkout.addEventListener('click', () => {
+    if (!cart.length) {
+      alert('Giỏ hàng của bạn đang trống!');
+      return;
+    }
+    alert('Đây là nút thanh toán minh họa. Bạn cần tích hợp backend/cổng thanh toán để nhận đơn thật.');
+  });
+});
+
+
+const grid = document.getElementById('productGrid');
+const pagination = document.getElementById('pagination');
+const pageInfo = document.getElementById('pageInfo');
+const searchInput = document.getElementById('productSearch');
+const sortSelect = document.getElementById('sortProducts');
+let currentPage = 1;
+const perPage = 20;
+let filteredProducts = [...PRODUCTS];
+
+function renderCatalog() {
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / perPage));
+  if (currentPage > totalPages) currentPage = totalPages;
+  const start = (currentPage - 1) * perPage;
+  const pageProducts = filteredProducts.slice(start, start + perPage);
+
+  if (!pageProducts.length) {
+    grid.innerHTML = '<p>Không tìm thấy sản phẩm phù hợp.</p>';
+  } else {
+    grid.innerHTML = pageProducts.map(p => `
+      <article class="product-card">
+        <a href="chitiet.html?id=${encodeURIComponent(p.id)}" aria-label="Xem ${escapeHTML(p.name)}">
+          <img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" loading="lazy">
+        </a>
+        <div class="product-info">
+          <h3>${escapeHTML(p.name)}</h3>
+          <p>${escapeHTML(p.description)}</p>
+          <div class="price">${formatMoney(p.price)}</div>
+          <div class="card-actions">
+            <button class="add-cart-btn" type="button" data-add-product="${escapeHTML(p.id)}">Thêm vào giỏ</button>
+            <a class="detail-link" href="chitiet.html?id=${encodeURIComponent(p.id)}">Chi tiết</a>
+          </div>
+        </div>
+      </article>`).join('');
+    grid.querySelectorAll('[data-add-product]').forEach(button => {
+      button.addEventListener('click', () => addToCart(button.dataset.addProduct, 1));
+    });
+  }
+
+  pagination.innerHTML = '';
+  function addPageButton(label, page, disabled = false, active = false) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'page-btn' + (active ? ' active' : '');
+    btn.textContent = label;
+    btn.disabled = disabled;
+    btn.setAttribute('aria-label', typeof label === 'number' ? 'Trang ' + label : label);
+    if (active) btn.setAttribute('aria-current', 'page');
+    btn.addEventListener('click', () => {
+      currentPage = page;
+      renderCatalog();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+    pagination.appendChild(btn);
+  }
+
+  addPageButton('‹', Math.max(1, currentPage - 1), currentPage === 1);
+  for (let page = 1; page <= totalPages; page++) {
+    if (totalPages <= 7 || page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1) {
+      addPageButton(String(page), page, false, page === currentPage);
+    } else if (page === 2 && currentPage > 4 || page === totalPages - 1 && currentPage < totalPages - 3) {
+      const dots = document.createElement('span');
+      dots.textContent = '…';
+      dots.style.padding = '8px 2px';
+      pagination.appendChild(dots);
+    }
+  }
+  addPageButton('›', Math.min(totalPages, currentPage + 1), currentPage === totalPages);
+  const shownFrom = filteredProducts.length ? start + 1 : 0;
+  const shownTo = Math.min(start + perPage, filteredProducts.length);
+  pageInfo.textContent = `Hiển thị ${shownFrom}–${shownTo} / ${filteredProducts.length} sản phẩm · ${perPage} sản phẩm mỗi trang`;
+}
+
+function applyFilters() {
+  const keyword = (searchInput.value || '').trim().toLocaleLowerCase('vi');
+  filteredProducts = PRODUCTS.filter(p => (p.name + ' ' + p.description).toLocaleLowerCase('vi').includes(keyword));
+  if (sortSelect.value === 'price-asc') filteredProducts.sort((a,b) => a.price - b.price);
+  if (sortSelect.value === 'price-desc') filteredProducts.sort((a,b) => b.price - a.price);
+  if (sortSelect.value === 'name') filteredProducts.sort((a,b) => a.name.localeCompare(b.name, 'vi'));
+  currentPage = 1;
+  renderCatalog();
+}
+searchInput.addEventListener('input', applyFilters);
+sortSelect.addEventListener('change', applyFilters);
+renderCatalog();
+
+</script>
+</body>
+</html>
