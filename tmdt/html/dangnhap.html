@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Mộc Đỏ Coffee</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #78350f;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-group input:focus {
+            border-color: #b45309;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.1);
+        }
+        .error-msg {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #b45309;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .auth-btn:hover {
+            background-color: #92400e;
+        }
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .auth-switch a {
+            color: #b45309;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email đăng ký</label>
+                <input type="email" id="loginEmail" placeholder="Nhập email của bạn">
+            </div>
+
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="loginPassword" placeholder="Nhập mật khẩu">
+                <span class="error-msg" id="loginError"></span>
+            </div>
+
+            <button type="submit" class="auth-btn">Đăng Nhập</button>
+
+            <div class="auth-switch">
+                Chưa có tài khoản? <a href="dangky.html">Đăng ký ngay</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let email = document.getElementById('loginEmail').value.trim();
+            let password = document.getElementById('loginPassword').value;
+            let errorMsg = document.getElementById('loginError');
+
+            // Lấy dữ liệu từ localStorage dựa vào khóa 'user_' + email
+            let storedUser = localStorage.getItem('user_' + email);
+
+            if (!storedUser) {
+                errorMsg.innerText = 'Email này chưa được đăng ký tài khoản.';
+                return;
+            }
+
+            let userData = JSON.parse(storedUser);
+
+            if (userData.password === password) {
+                alert('Đăng nhập thành công! Chào mừng ' + userData.fullname);
+                // Lưu trạng thái đang đăng nhập
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                // Chuyển hướng về trang chủ
+                window.location.href = 'index.html';
+            } else {
+                errorMsg.innerText = 'Mật khẩu không chính xác.';
+            }
+        });
+    </script>
+</body>
+</html>

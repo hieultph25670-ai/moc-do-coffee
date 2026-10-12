@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mộc Đỏ Coffee - Cà phê Việt</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/app.js" defer></script>
+    <style>
+        .auth-buttons-header {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: 10px;
+        }
+        .btn-login, .btn-register {
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-login {
+            color: #78350f;
+            border: 1px solid #78350f;
+            background: transparent;
+        }
+        .btn-login:hover {
+            background: #fef3c7;
+        }
+        .btn-register {
+            color: #fff;
+            background: #b45309;
+            border: 1px solid #b45309;
+        }
+        .btn-register:hover {
+            background: #92400e;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="announcement">
+        CÀ PHÊ VIỆT - HƯƠNG VỊ QUEN THUỘC
+    </div>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">MĐ</span>
+            <span>MỘC ĐỎ<small>COFFEE & TEA</small></span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <nav id="mainNav">
+            <a href="index.html" class="active">Trang chủ</a>
+            <a href="danhmuc.html">Danh mục</a>
+            <a href="sanpham.html">Sản phẩm</a>
+            <a href="#about">Giới thiệu</a>
+            <a href="#contact">Liên hệ</a>
+        </nav>
+
+        <div class="header-buttons">
+            <button id="searchToggle" class="search-button">⌕</button>
+            <button id="cartOpen" class="cart-button">
+                Giỏ hàng <span id="cartCount">0</span>
+            </button>
+
+            <div class="auth-buttons-header">
+                <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
+                <a href="dangky.html" class="btn-register">Đăng ký</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-panel" id="searchPanel">
+        <form id="searchForm">
+            <input type="search" id="searchInput" placeholder="Nhập tên cà phê cần tìm...">
+            <button type="submit">Tìm kiếm</button>
+            <button type="button" id="searchClose">✕</button>
+        </form>
+    </div>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="subtitle">☕ HƯƠNG VỊ CÀ PHÊ VIỆT</p>
+
+                <h1>Đậm vị cà phê.<br>
+                    <span>Trọn từng khoảnh khắc.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Khởi đầu ngày mới với một ly cà phê thơm ngon.
+                    Tận hưởng hương vị thân quen trong không gian
+                    ấm áp cùng Mộc Đỏ Coffee.
+                </p>
+
+                <a href="sanpham.html" class="primary-button">
+                    Khám phá thực đơn →
+                </a>
+
+                <div class="hero-note">
+                    <span>☕</span>
+                    <div>
+                        <strong>Cà phê Việt Nam</strong>
+                        <small>Chọn lọc hương vị mỗi ngày</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0aXk0MWp3bTNpaWw0N2hsaHNwNWZkMXBscHR6M21oZzE2aHE0ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L1QnWs6suLJiY91Eny/giphy.gif" alt="Ly cà phê động">
+                <div class="image-label">
+                    <strong>COFFEE TIME</strong>
+                    <small>Made with love ♥</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <span>☕</span>
+                <div>
+                    <strong>Cà phê chất lượng</strong>
+                    <p>Hương vị đậm đà</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <span>♡</span>
+                <div>
+                    <strong>Phục vụ tận tâm</strong>
+                    <p>Chăm chút từng ly</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <span>✦</span>
+                <div>
+                    <strong>Không gian ấm áp</strong>
+                    <p>Thư giãn mỗi ngày</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section" id="menu">
+            <div class="section-heading">
+                <div>
+                    <p class="subtitle">MENU ĐƯỢC YÊU THÍCH</p>
+                    <h2>Thực đơn <span>nhà Mộc</span></h2>
+                </div>
+
+                <p>
+                    Cà phê đậm vị, trà thanh mát và những thức uống
+                    hấp dẫn dành cho bạn.
+                </p>
+            </div>
+
+            <div class="categories">
+                <button class
