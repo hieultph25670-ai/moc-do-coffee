@@ -1,0 +1,262 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #1e3932;
+    background: #f5f7f5;
+}
+
+.login-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Bên trái */
+.login-left {
+    width: 45%;
+    padding: 45px;
+    color: white;
+    background:
+        linear-gradient(135deg, #002e24, #006241);
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.intro {
+    margin-top: 110px;
+}
+
+.subtitle {
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.intro h1 {
+    font-size: 38px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.intro > p:not(.subtitle) {
+    line-height: 1.8;
+    color: #e0ebe5;
+    max-width: 500px;
+}
+
+.features {
+    display: flex;
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.features div {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Bên phải */
+.login-right {
+    width: 55%;
+    padding: 40px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 480px;
+}
+
+.logo-center {
+    margin: 0 auto 15px;
+    width: 65px;
+    height: 65px;
+    border-color: #006241;
+    color: #006241;
+}
+
+.form-box h2 {
+    text-align: center;
+    color: #006241;
+    letter-spacing: 3px;
+    margin-bottom: 45px;
+}
+
+.form-box h3 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 12px;
+}
+
+.description {
+    text-align: center;
+    color: #718078;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+form > label {
+    display: block;
+    margin: 18px 0 9px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"],
+.password-box input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #cbd5d0;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #00754a;
+    box-shadow: 0 0 0 3px #00754a18;
+}
+
+.password-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 65px;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px;
+    border: none;
+    background: transparent;
+    color: #006241;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0 28px;
+    font-size: 13px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-options a,
+.contact a {
+    color: #00754a;
+    text-decoration: none;
+}
+
+.form-options a:hover,
+.contact a:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 16px;
+    background: #006241;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-button:hover {
+    background: #004c35;
+}
+
+#message {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.contact {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+footer {
+    margin-top: 65px;
+    color: #7b8780;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Điện thoại và máy tính bảng */
+@media (max-width: 850px) {
+    .login-left {
+        display: none;
+    }
+
+    .login-right {
+        width: 100%;
+        min-height: 100vh;
+        padding: 35px 22px;
+    }
+
+    .form-box h2 {
+        margin-bottom: 35px;
+    }
+
+    footer {
+        margin-top: 45px;
+    }
+}
+
+@media (max-width: 400px) {
+    .form-box h3 {
+        font-size: 23px;
+    }
+
+    .form-options {
+        font-size: 12px;
+    }
+}
