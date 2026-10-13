@@ -1,0 +1,1347 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#006241">
+    <title>Đăng ký thành viên | Starbucks</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --green: #006241;
+    --green-dark: #004c35;
+    --cream: #f7f5ef;
+    --white: #ffffff;
+    --text: #202820;
+    --muted: #777d75;
+    --border: #e3e7df;
+    --error: #c43d35;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: var(--text);
+    background: var(--cream);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button, input {
+    font: inherit;
+}
+
+/* NAVBAR */
+
+.navbar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    min-height: 82px;
+    padding: 0 5%;
+    background: #fff;
+    border-bottom: 1px solid #e5ebe5;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--green);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: white;
+    background: var(--green);
+}
+
+.nav-menu, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-menu {
+    margin: 0 auto;
+}
+
+.nav-menu a {
+    color: #535a52;
+    font-size: 12px;
+    transition: color .25s;
+}
+
+.nav-menu a:hover {
+    color: var(--green);
+}
+
+.nav-right {
+    gap: 10px;
+}
+
+.store-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.store-link i {
+    color: var(--green);
+}
+
+.btn-login, .btn-register {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 15px;
+    border: 1px solid var(--green);
+    border-radius: 25px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.btn-login {
+    color: var(--green);
+}
+
+.btn-login:hover {
+    background: #e4f0e8;
+}
+
+.btn-register {
+    color: white;
+    background: var(--green);
+}
+
+.btn-register:hover {
+    background: var(--green-dark);
+}
+
+.cart-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--green);
+    font-size: 12px;
+}
+
+.badge {
+    display: grid;
+    place-items: center;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    color: white;
+    background: var(--green);
+    font-size: 10px;
+}
+
+/* MAIN LAYOUT */
+
+.register-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min(1400px, 100%);
+    min-height: calc(100vh - 82px);
+    margin: auto;
+    padding: 32px 5%;
+}
+
+/* LEFT PANEL */
+
+.welcome-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 650px;
+    overflow: hidden;
+    padding: 45px;
+    border-radius: 22px 0 0 22px;
+    color: white;
+    background-color: #17432e;
+    background-image: url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1400&q=85");
+    background-position: center;
+    background-size: cover;
+}
+
+.welcome-panel::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(
+        180deg,
+        rgba(5, 35, 23, .35),
+        rgba(5, 35, 23, .92)
+    );
+}
+
+.welcome-overlay {
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    box-shadow: 0 0 0 30px rgba(255,255,255,.04);
+}
+
+.welcome-content {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    animation: appear .7s ease;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 24px;
+    color: #d0e5d3;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.welcome-content h1 {
+    margin-bottom: 20px;
+    font-size: clamp(32px, 3.2vw, 46px);
+    line-height: 1.4;
+    letter-spacing: -1px;
+}
+
+.welcome-content h1 span {
+    color: #b9d9bd;
+    font-style: italic;
+}
+
+.welcome-content > p {
+    max-width: 360px;
+    color: rgba(255,255,255,.82);
+    font-size: 12px;
+    line-height: 2;
+}
+
+.welcome-features {
+    display: grid;
+    gap: 20px;
+    margin-top: 38px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.feature-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 13px;
+    color: #d0e5d3;
+    background: rgba(255,255,255,.1);
+}
+
+.feature strong, .feature small {
+    display: block;
+}
+
+.feature strong {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.feature small {
+    color: rgba(255,255,255,.7);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.welcome-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 45px;
+    color: rgba(255,255,255,.7);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.welcome-footer span {
+    width: 30px;
+    height: 1px;
+    background: #b9d9bd;
+}
+
+/* RIGHT PANEL */
+
+.form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 35px 30px;
+    border-radius: 0 22px 22px 0;
+    background: white;
+    box-shadow: 0 20px 60px rgba(24,56,39,.1);
+}
+
+.register-card {
+    width: 100%;
+    max-width: 440px;
+}
+
+.mobile-brand {
+    display: none;
+}
+
+.form-heading {
+    margin-bottom: 25px;
+}
+
+.form-tag {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--green);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.form-heading h2 {
+    margin-bottom: 8px;
+    color: #1d2d22;
+    font-size: 29px;
+    letter-spacing: -1px;
+}
+
+.form-heading p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* INPUTS */
+
+.form-group {
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #343d35;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.form-group label span {
+    color: var(--error);
+}
+
+.input-wrap {
+    display: flex;
+    align-items: center;
+    min-height: 47px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fbfcfa;
+    transition: .25s;
+}
+
+.input-wrap:focus-within {
+    border-color: var(--green);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0,98,65,.08);
+}
+
+.input-icon {
+    flex-shrink: 0;
+    width: 42px;
+    color: #87938a;
+    text-align: center;
+    font-size: 14px;
+}
+
+.input-wrap:focus-within .input-icon {
+    color: var(--green);
+}
+
+.input-wrap input {
+    width: 100%;
+    min-width: 0;
+    height: 45px;
+    padding: 0 10px 0 0;
+    border: 0;
+    outline: 0;
+    color: #26382b;
+    background: transparent;
+    font-size: 11px;
+}
+
+.input-wrap input::placeholder {
+    color: #a5aaa4;
+}
+
+.toggle-password {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 44px;
+    border: 0;
+    color: #909991;
+    background: transparent;
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    color: var(--green);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.form-row .input-icon {
+    width: 33px;
+    font-size: 12px;
+}
+
+.form-row .input-wrap input {
+    font-size: 10px;
+}
+
+.form-row .toggle-password {
+    width: 30px;
+}
+
+/* ERRORS */
+
+.input-wrap.has-error {
+    border-color: var(--error);
+    background: #fffafa;
+}
+
+.input-wrap.has-error .input-icon {
+    color: var(--error);
+}
+
+.error-msg {
+    display: block;
+    color: var(--error);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.error-msg:not(:empty) {
+    margin-top: 5px;
+}
+
+/* TERMS */
+
+.terms-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 3px;
+}
+
+.terms-group input {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    accent-color: var(--green);
+    cursor: pointer;
+}
+
+.terms-group label {
+    color: #6e756d;
+    font-size: 10px;
+    line-height: 1.9;
+    cursor: pointer;
+}
+
+.terms-group a {
+    color: var(--green);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.terms-group a:hover {
+    color: var(--green-dark);
+}
+
+/* BUTTON */
+
+.btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 49px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    background: var(--green);
+    box-shadow: 0 7px 18px rgba(0,98,65,.15);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.btn-submit:hover {
+    background: var(--green-dark);
+    box-shadow: 0 10px 24px rgba(0,98,65,.2);
+    transform: translateY(-2px);
+}
+
+.btn-submit i {
+    transition: transform .25s;
+}
+
+.btn-submit:hover i {
+    transform: translateX(4px);
+}
+
+.btn-submit:disabled {
+    cursor: wait;
+    opacity: .7;
+}
+
+/* FEEDBACK */
+
+.form-feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border: 1px solid #bfe2cd;
+    border-radius: 9px;
+    color: #087443;
+    background: #f0faf3;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.form-feedback.error {
+    border-color: #f0c7c4;
+    color: var(--error);
+    background: #fff5f4;
+}
+
+.form-feedback i {
+    margin-right: 7px;
+}
+
+/* FOOTER */
+
+.form-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 19px;
+}
+
+.form-divider::before, .form-divider::after {
+    flex: 1;
+    height: 1px;
+    content: "";
+    background: #ebeee9;
+}
+
+.form-divider span {
+    color: #929990;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.redirect-text {
+    color: #777e76;
+    font-size: 11px;
+    text-align: center;
+}
+
+.redirect-text a {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.redirect-text a:hover {
+    text-decoration: underline;
+}
+
+.privacy-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 22px;
+    color: #989f97;
+    font-size: 9px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.privacy-note i {
+    color: var(--green);
+}
+
+/* ANIMATION */
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+    .navbar {
+        padding: 0 3%;
+        gap: 12px;
+    }
+
+    .nav-menu, .nav-right {
+        gap: 12px;
+    }
+
+    .cart-text {
+        display: none;
+    }
+
+    .register-container {
+        padding: 25px 3%;
+    }
+
+    .welcome-panel {
+        padding: 30px;
+    }
+
+    .form-panel {
+        padding: 30px 20px;
+    }
+
+    .welcome-content h1 {
+        font-size: 35px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+    body {
+        background: #f6f8f4;
+    }
+
+    .navbar {
+        min-height: 66px;
+        padding: 0 16px;
+    }
+
+    .logo {
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .nav-menu, .store-link, .btn-login, .cart-btn {
+        display: none;
+    }
+
+    .btn-register {
+        min-height: 35px;
+        padding: 0 13px;
+        font-size: 10px;
+    }
+
+    .register-container {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+        padding: 0;
+    }
+
+    .welcome-panel {
+        display: none;
+    }
+
+    .form-panel {
+        align-items: flex-start;
+        min-height: calc(100vh - 66px);
+        padding: 27px 21px 35px;
+        border-radius: 0;
+        background: white;
+        box-shadow: none;
+    }
+
+    .register-card {
+        max-width: 460px;
+        margin: 0 auto;
+    }
+
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 30px;
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+    }
+
+    .mobile-brand i {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: white;
+        background: var(--green);
+    }
+
+    .form-heading h2 {
+        font-size: 27px;
+    }
+
+    .input-wrap {
+        min-height: 49px;
+    }
+
+    .input-wrap input {
+        height: 47px;
+        font-size: 12px;
+    }
+
+    .form-row .input-wrap input {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .navbar {
+        padding: 0 11px;
+    }
+
+    .logo {
+        font-size: 12px;
+    }
+
+    .form-panel {
+        padding: 23px 14px 30px;
+    }
+
+    .form-row {
+        gap: 7px;
+    }
+
+    .form-row .input-icon {
+        width: 26px;
+    }
+
+    .form-row .toggle-password {
+        width: 26px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-mug-hot"></i>
+            </span>
+            <span>STARBUCKS</span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Điều hướng chính">
+            <a href="index.html">Trang chủ</a>
+            <a href="#">Danh mục</a>
+            <a href="#">Sản phẩm</a>
+        </nav>
+
+        <div class="nav-right">
+            <a href="#" class="store-link">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Cửa hàng</span>
+            </a>
+            <a href="dangnhap.html" class="btn-login">Đăng nhập</a>
+            <a href="dangky.html" class="btn-register active">Đăng ký</a>
+            <a href="#" class="cart-btn" aria-label="Giỏ hàng">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-text">Giỏ hàng</span>
+                <span class="badge">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="register-container">
+        <section class="welcome-panel">
+            <div class="welcome-overlay"></div>
+
+            <div class="welcome-content">
+                <span class="eyebrow">
+                    <i class="fa-solid fa-seedling"></i>
+                    GOOD COFFEE, GOOD MOMENTS
+                </span>
+
+                <h1>Mỗi ngày<br>một chút <span>cảm hứng.</span></h1>
+
+                <p>
+                    Khám phá thế giới cà phê, tận hưởng những khoảnh khắc
+                    tuyệt vời và nhận nhiều ưu đãi dành riêng cho bạn.
+                </p>
+
+                <div class="welcome-features">
+                    <div class="feature">
+                        <span class="feature-icon">
+                            <i class="fa-solid fa-gift"></i>
+                        </span>
+                        <div>
+                            <strong>Ưu đãi hấp dẫn</strong>
+                            <small>Nhiều đặc quyền dành cho thành viên</small>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <span class="feature-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </span>
+                        <div>
+                            <strong>Trải nghiệm riêng</strong>
+                            <small>Tận hưởng từng khoảnh khắc cà phê</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="welcome-footer">
+                    <span></span>
+                    YOUR COFFEE, YOUR MOMENT
+                </div>
+            </div>
+        </section>
+
+        <section class="form-panel">
+            <div class="register-card">
+                <div class="mobile-brand">
+                    <i class="fa-solid fa-mug-hot"></i>
+                    STARBUCKS
+                </div>
+
+                <div class="form-heading">
+                    <span class="form-tag">JOIN OUR COMMUNITY</span>
+                    <h2>Tạo tài khoản</h2>
+                    <p>Bắt đầu hành trình cà phê của riêng bạn.</p>
+                </div>
+
+                <form id="registerForm" novalidate>
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên <span>*</span></label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-user input-icon"></i>
+                            <input type="text" id="fullname"
+                                   placeholder="Nhập họ và tên đầy đủ"
+                                   autocomplete="name">
+                        </div>
+                        <small class="error-msg" id="fullname-error"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Địa chỉ email <span>*</span></label>
+                        <div class="input-wrap">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                            <input type="email" id="email"
+                                   placeholder="example@email.com"
+                                   autocomplete="email">
+                        </div>
+                        <small class="error-msg" id="email-error"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại <span>*</span></label>
+                        <div class="input-wrap">
+                            <i class="fa-solid fa-mobile-screen-button input-icon"></i>
+                            <input type="tel" id="phone"
+                                   placeholder="Nhập số điện thoại"
+                                   inputmode="numeric"
+                                   autocomplete="tel">
+                        </div>
+                        <small class="error-msg" id="phone-error"></small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Mật khẩu <span>*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-lock input-icon"></i>
+                                <input type="password" id="password"
+                                       placeholder="Tối thiểu 6 ký tự"
+                                       autocomplete="new-password">
+                                <button type="button" class="toggle-password"
+                                        data-target="password"
+                                        aria-label="Hiện mật khẩu"
+                                        aria-pressed="false">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <small class="error-msg" id="password-error"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác nhận <span>*</span></label>
+                            <div class="input-wrap">
+                                <i class="fa-solid fa-shield-halved input-icon"></i>
+                                <input type="password" id="confirmPassword"
+                                       placeholder="Nhập lại mật khẩu"
+                                       autocomplete="new-password">
+                                <button type="button" class="toggle-password"
+                                        data-target="confirmPassword"
+                                        aria-label="Hiện mật khẩu xác nhận"
+                                        aria-pressed="false">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <small class="error-msg" id="confirmPassword-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="terms-group">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">
+                            Tôi đồng ý với <a href="#">Điều khoản sử dụng</a>
+                            và <a href="#">Chính sách bảo mật</a>.
+                        </label>
+                    </div>
+                    <small class="error-msg terms-error" id="terms-error"></small>
+
+                    <button type="submit" class="btn-submit">
+                        TẠO TÀI KHOẢN
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <div class="form-divider">
+                        <span>THÀNH VIÊN STARBUCKS</span>
+                    </div>
+
+                    <p class="redirect-text">
+                        Bạn đã có tài khoản?
+                        <a href="dangnhap.html">Đăng nhập ngay</a>
+                    </p>
+
+                    <p class="privacy-note">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Thông tin của bạn được sử dụng theo chính sách bảo mật.
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("registerForm");
+
+    if (!form) return;
+
+    const fields = {
+        fullname: document.getElementById("fullname"),
+        email: document.getElementById("email"),
+        phone: document.getElementById("phone"),
+        password: document.getElementById("password"),
+        confirmPassword: document.getElementById("confirmPassword"),
+        terms: document.getElementById("terms")
+    };
+
+    const submitButton = form.querySelector(".btn-submit");
+
+    // Tao vung thong bao
+    const feedback = document.createElement("div");
+
+    feedback.className = "form-feedback";
+    feedback.id = "form-feedback";
+    feedback.setAttribute("role", "status");
+    feedback.setAttribute("aria-live", "polite");
+    feedback.hidden = true;
+
+    submitButton.insertAdjacentElement("afterend", feedback);
+
+    // HIEN / AN MAT KHAU
+    document.querySelectorAll(".toggle-password").forEach(function (button) {
+        button.addEventListener("click", function () {
+            const input = document.getElementById(button.dataset.target);
+
+            if (!input) return;
+
+            const show = input.type === "password";
+
+            input.type = show ? "text" : "password";
+
+            button.setAttribute("aria-pressed", String(show));
+            button.setAttribute(
+                "aria-label",
+                show ? "Ẩn mật khẩu" : "Hiện mật khẩu"
+            );
+
+            const icon = button.querySelector("i");
+
+            if (icon) {
+                icon.classList.toggle("fa-eye", !show);
+                icon.classList.toggle("fa-eye-slash", show);
+            }
+        });
+    });
+
+    // HIEN THI LOI
+    function showError(name, message) {
+        const field = fields[name];
+        const error = document.getElementById(name + "-error");
+
+        if (name === "terms") {
+            if (error) error.textContent = message;
+
+            field.setAttribute(
+                "aria-invalid",
+                message ? "true" : "false"
+            );
+
+            return;
+        }
+
+        if (!field) return;
+
+        const wrap = field.closest(".input-wrap");
+
+        if (wrap) {
+            wrap.classList.toggle("has-error", Boolean(message));
+        }
+
+        field.setAttribute(
+            "aria-invalid",
+            message ? "true" : "false"
+        );
+
+        if (error) error.textContent = message;
+    }
+
+    function clearError(name) {
+        showError(name, "");
+    }
+
+    function showFeedback(message, type = "success") {
+        feedback.className = "form-feedback";
+
+        if (type === "error") {
+            feedback.classList.add("error");
+        }
+
+        const icon = document.createElement("i");
+
+        icon.className = type === "error"
+            ? "fa-solid fa-circle-exclamation"
+            : "fa-solid fa-circle-check";
+
+        feedback.replaceChildren(
+            icon,
+            document.createTextNode(message)
+        );
+
+        feedback.hidden = false;
+    }
+
+    function hideFeedback() {
+        feedback.hidden = true;
+        feedback.replaceChildren();
+    }
+
+    // KIEM TRA HO TEN
+    function validateFullname() {
+        const value = fields.fullname.value.trim();
+
+        if (!value) {
+            showError("fullname", "Vui lòng nhập họ và tên.");
+            return false;
+        }
+
+        if (value.length < 2 || value.length > 100) {
+            showError(
+                "fullname",
+                "Họ và tên phải có từ 2 đến 100 ký tự."
+            );
+            return false;
+        }
+
+        if (/\d/.test(value)) {
+            showError(
+                "fullname",
+                "Họ và tên không được chứa chữ số."
+            );
+            return false;
+        }
+
+        clearError("fullname");
+        return true;
+    }
+
+    // KIEM TRA EMAIL
+    function validateEmail() {
+        const value = fields.email.value.trim();
+
+        if (!value) {
+            showError("email", "Vui lòng nhập địa chỉ email.");
+            return false;
+        }
+
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!pattern.test(value)) {
+            showError("email", "Địa chỉ email chưa hợp lệ.");
+            return false;
+        }
+
+        clearError("email");
+        return true;
+    }
+
+    // KIEM TRA SO DIEN THOAI VIET NAM
+    function validatePhone() {
+        const value = fields.phone.value.trim();
+        const normalized = value.replace(/[\s().-]/g, "");
+
+        if (!value) {
+            showError("phone", "Vui lòng nhập số điện thoại.");
+            return false;
+        }
+
+        const pattern = /^(?:0\d{9}|\+84\d{9}|84\d{9})$/;
+
+        if (!pattern.test(normalized)) {
+            showError(
+                "phone",
+                "Nhập số điện thoại Việt Nam gồm 10 số."
+            );
+            return false;
+        }
+
+        clearError("phone");
+        return true;
+    }
+
+    // KIEM TRA MAT KHAU
+    function validatePassword() {
+        const value = fields.password.value;
+
+        if (!value) {
+            showError("password", "Vui lòng nhập mật khẩu.");
+            return false;
+        }
+
+        if (value.length < 6) {
+            showError(
+                "password",
+                "Mật khẩu phải có ít nhất 6 ký tự."
+            );
+            return false;
+        }
+
+        if (value.length > 128) {
+            showError(
+                "password",
+                "Mật khẩu không được vượt quá 128 ký tự."
+            );
+            return false;
+        }
+
+        clearError("password");
+        return true;
+    }
+
+    // XAC NHAN MAT KHAU
+    function validateConfirmPassword() {
+        if (!fields.confirmPassword.value) {
+            showError(
+                "confirmPassword",
+                "Vui lòng nhập lại mật khẩu."
+            );
+            return false;
+        }
+
+        if (
+            fields.confirmPassword.value !== fields.password.value
+        ) {
+            showError(
+                "confirmPassword",
+                "Mật khẩu xác nhận không khớp."
+            );
+            return false;
+        }
+
+        clearError("confirmPassword");
+        return true;
+    }
+
+    // KIEM TRA DIEU KHOAN
+    function validateTerms() {
+        if (!fields.terms.checked) {
+            showError(
+                "terms",
+                "Bạn cần đồng ý với điều khoản để tiếp tục."
+            );
+            return false;
+        }
+
+        clearError("terms");
+        return true;
+    }
+
+    // KIEM TRA TOAN BO FORM
+    function validateForm() {
+        const results = [
+            validateFullname(),
+            validateEmail(),
+            validatePhone(),
+            validatePassword(),
+            validateConfirmPassword(),
+            validateTerms()
+        ];
+
+        return results.every(Boolean);
+    }
+
+    // KIEM TRA KHI NHAP DU LIEU
+    const validators = {
+        fullname: validateFullname,
+        email: validateEmail,
+        phone: validatePhone,
+        password: validatePassword,
+        confirmPassword: validateConfirmPassword
+    };
+
+    Object.entries(validators).forEach(function ([name, validator]) {
+        const field = fields[name];
+
+        field.addEventListener("input", function () {
+            if (field.getAttribute("aria-invalid") === "true") {
+                validator();
+            }
+
+            if (
+                name === "password" &&
+                fields.confirmPassword.value &&
+                fields.confirmPassword.getAttribute("aria-invalid") === "true"
+            ) {
+                validateConfirmPassword();
+            }
+
+            hideFeedback();
+        });
+
+        field.addEventListener("blur", function () {
+            if (field.value.trim()) {
+                validator();
+            }
+        });
+    });
+
+    fields.terms.addEventListener("change", function () {
+        if (fields.terms.checked) {
+            clearError("terms");
+        }
+
+        hideFeedback();
+    });
+
+    // XU LY KHI NHAN NUT DANG KY
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        hideFeedback();
+
+        if (!validateForm()) {
+            const firstInvalid = form.querySelector(
+                '[aria-invalid="true"]'
+            );
+
+            if (firstInvalid) {
+                firstInvalid.focus();
+            }
+
+            return;
+        }
+
+        showFeedback(
+            "Thông tin hợp lệ! Bạn có thể kết nối form với hệ thống đăng ký.",
+            "success"
+        );
+    });
+});
+</script>
+</body>
+</html>
