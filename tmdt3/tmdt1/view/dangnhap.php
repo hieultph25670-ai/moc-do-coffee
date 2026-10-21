@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <base href="view/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#006241">
+    <title>Đăng nhập | Starbucks</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: "Be Vietnam Pro", sans-serif;
+            color: #1e3932;
+            background: #f1f8f5;
+        }
+
+        .login-card {
+            width: min(440px, 100%);
+            padding: 38px;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 12px 40px rgba(20, 50, 39, .1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            color: #006241;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo-icon {
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            color: #fff;
+            background: #006241;
+            font-size: 23px;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            text-align: center;
+            font-size: 27px;
+        }
+
+        .sub {
+            margin-bottom: 28px;
+            color: #69736d;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #cfd8d2;
+            border-radius: 10px;
+            outline: none;
+            background: #fff;
+            font: inherit;
+            font-size: 14px;
+        }
+
+        .field input:focus {
+            border-color: #006241;
+            box-shadow: 0 0 0 3px rgba(0, 98, 65, .1);
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0 20px;
+            font-size: 12px;
+        }
+
+        .submit {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: #006241;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #004c36;
+        }
+
+        .submit:disabled {
+            cursor: wait;
+            opacity: .7;
+        }
+
+        .message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .message.error {
+            display: block;
+            color: #a12622;
+            background: #fff0ef;
+        }
+
+        .message.success {
+            display: block;
+            color: #006241;
+            background: #eaf5ee;
+        }
+
+        .links {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        .links a {
+            color: #006241;
+            font-weight: 700;
+        }
+
+        .back {
+            display: block;
+            margin-top: 18px;
+            color: #52625a;
+            text-align: center;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <div class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-mug-hot"></i>
+            </span>
+            <span>STARBUCKS</span>
+        </div>
+
+        <h1>Chào mừng trở lại</h1>
+        <p class="sub">
+            Đăng nhập để tiếp tục trải nghiệm cùng Starbucks
+        </p>
+
+        <form id="loginForm">
+            <div class="field">
+                <label for="loginName">Email hoặc họ và tên</label>
+                <input
+                    id="loginName"
+                    name="loginName"
+                    autocomplete="username"
+                    required
+                    placeholder="Nhập email hoặc họ tên">
+            </div>
+
+            <div class="field">
+                <label for="password">Mật khẩu</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    required
+                    placeholder="Nhập mật khẩu">
+            </div>
+
+            <label class="remember">
+                <input type="checkbox" id="rememberMe">
+                Ghi nhớ tên đăng nhập trên thiết bị này
+            </label>
+
+            <button class="submit" id="loginButton" type="submit">
+                ĐĂNG NHẬP
+            </button>
+
+            <div id="message" class="message" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="links">
+            Chưa có tài khoản?
+            <a href="../index.php?page=dangky">Đăng ký ngay</a>
+        </div>
+
+        <a class="back" href="../index.php?page=index">
+            <i class="fa-solid fa-arrow-left"></i>
+            Quay về trang chủ
+        </a>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("loginForm");
+            const loginName = document.getElementById("loginName");
+            const password = document.getElementById("password");
+            const rememberMe = document.getElementById("rememberMe");
+            const loginButton = document.getElementById("loginButton");
+            const message = document.getElementById("message");
+
+            // Điền tên đăng nhập đã ghi nhớ
+            loginName.value = localStorage.getItem("rememberedUsername") || "";
+            rememberMe.checked = loginName.value !== "";
+
+            // Đọc tài khoản đã đăng ký
+            function getUsers() {
+                try {
+                    const data = localStorage.getItem("users");
+                    const users = data ? JSON.parse(data) : [];
+                    return Array.isArray(users) ? users : [];
+                } catch (error) {
+                    console.error("Không đọc được danh sách tài khoản:", error);
+                    return [];
+                }
+            }
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                message.className = "message";
+                message.textContent = "";
+
+                const enteredName = loginName.value.trim().toLowerCase();
+                const enteredPassword = password.value;
+                const users = getUsers();
+
+                // Tìm tài khoản theo email, họ tên hoặc username
+                const user = users.find(function (item) {
+                    const possibleNames = [
+                        item.email,
+                        item.username,
+                        item.tenDangNhap,
+                        item.fullname,
+                        item.name
+                    ]
+                    .filter(Boolean)
+                    .map(function (value) {
+                        return String(value).trim().toLowerCase();
+                    });
+
+                    return possibleNames.includes(enteredName) &&
+                        String(item.password || "") === enteredPassword;
+                });
+
+                if (!user) {
+                    message.className = "message error";
+                    message.textContent =
+                        "Email/họ tên hoặc mật khẩu không đúng. " +
+                        "Nếu chưa có tài khoản, hãy đăng ký trước.";
+                    return;
+                }
+
+                // Ghi nhớ tên đăng nhập nếu được chọn
+                if (rememberMe.checked) {
+                    localStorage.setItem(
+                        "rememberedUsername",
+                        loginName.value.trim()
+                    );
+                } else {
+                    localStorage.removeItem("rememberedUsername");
+                }
+
+                // Lưu thông tin người đăng nhập vào phiên hiện tại
+                const currentUser = {
+                    fullname: user.fullname || user.name ||
+                               user.username || user.email || "Khách hàng",
+                    email: user.email || "",
+                    phone: user.phone || ""
+                };
+
+                try {
+                    // Dùng localStorage để đồng bộ đăng nhập trên mọi trang + tab
+                    localStorage.setItem(
+                        "currentUser",
+                        JSON.stringify(currentUser)
+                    );
+
+                    // Kiểm tra việc lưu trước khi chuyển trang
+                    const savedUser = localStorage.getItem("currentUser");
+
+                    if (!savedUser) {
+                        throw new Error("Không lưu được thông tin người dùng.");
+                    }
+                } catch (error) {
+                    message.className = "message error";
+                    message.textContent =
+                        "Không thể lưu phiên đăng nhập. Hãy kiểm tra trình duyệt.";
+                    return;
+                }
+
+                message.className = "message success";
+                message.textContent =
+                    "Đăng nhập thành công! Đang chuyển về trang chủ...";
+
+                loginButton.disabled = true;
+
+                setTimeout(function () {
+                    // Chuyển về index.php cùng nguồn với trang đăng nhập
+                    window.location.replace("../index.php?page=index");
+                }, 500);
+                
+            });
+        });
+    </script>
+<script src="backend.js"></script>
+</body>
+</html>
